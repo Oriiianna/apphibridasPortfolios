@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Proyectos</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <h1 class="nav-logo">Nuestro Portfolio</h1>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="/" class="nav-link active" data-section="all">Todos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" data-section="Mobile">Mobile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" data-section="LandingPage">Landing Page</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" data-section="Web App">Web App</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" data-section="e-Commerce">E-Commerce</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link" data-section="Games">Games</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        <div class="container">
+            <div class="page-header">
+                <h2 id="page-title">Todos los Proyectos</h2>
+                <div class="header-actions">
+                    <button id="add-project-btn" class="btn btn-primary">+ Agregar Proyecto</button>
+                </div>
+                <div class="filters">
+                    <input type="text" id="search-name" placeholder="Buscar por nombre..." class="filter-input">
+                    <input type="text" id="search-tech" placeholder="Buscar por tecnología..." class="filter-input">
+                    <button id="clear-filters" class="btn btn-secondary">Limpiar Filtros</button>
+                </div>
+            </div>
+            
+            <div id="loading" class="loading">Cargando proyectos...</div>
+            <div id="projects-grid" class="projects-grid"></div>
+            <div id="no-projects" class="no-projects" style="display: none;">
+                No se encontraron proyectos para esta sección.
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal para agregar/editar proyecto -->
+    <div id="project-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-title">Agregar Nuevo Proyecto</h3>
+                <span class="close-modal">&times;</span>
+            </div>
+            <form id="project-form" class="project-form">
+                <div class="form-group">
+                    <label for="project-name">Nombre del Proyecto *</label>
+                    <input type="text" id="project-name" name="name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="project-description">Descripción *</label>
+                    <textarea id="project-description" name="description" required rows="4"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="project-link">Link del Repositorio *</label>
+                    <input type="url" id="project-link" name="link" required placeholder="https://github.com/user/proyecto">
+                </div>
+                
+                <div class="form-group">
+                    <label for="project-img">URL de la Imagen *</label>
+                    <input type="url" id="project-img" name="img" required placeholder="https://picsum.photos/400/225">
+                </div>
+                
+                <div class="form-group">
+                    <label for="project-section">Sección *</label>
+                    <select id="project-section" name="section" required>
+                        <option value="">Selecciona una sección</option>
+                        <option value="Mobile">Mobile</option>
+                        <option value="LandingPage">Landing Page</option>
+                        <option value="Web App">Web App</option>
+                        <option value="e-Commerce">E-Commerce</option>
+                        <option value="Games">Games</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="project-technologies">Tecnologías *</label>
+                    <div class="technologies-container" id="project-technologies">
+                        <div class="technology-item">
+                            <input type="checkbox" id="tech-react" name="technologies" value="React">
+                            <label for="tech-react">React</label>
+                        </div>
+                        <div class="technology-item">
+                            <input type="checkbox" id="tech-vue" name="technologies" value="Vue.js">
+                            <label for="tech-vue">Vue.js</label>
+                        </div>
+                        <div class="technology-item">
+                            <input type="checkbox" id="tech-angular" name="technologies" value="Angular">
+                            <label for="tech-angular">Angular</label>
+                        </div>
+                        <div class="technology-item">
+                            <input type="checkbox" id="tech-nodejs" name="technologies" value="Node.js">
+                            <label for="tech-nodejs">Node.js</label>
+                        </div>
+                        <div class="technology-item">
+                            <input type="checkbox" id="tech-express" name="technologies" value="Express">
+                            <label for="tech-express">Express</label>
+                        </div>
+                        <div class="technology-item">
+                            <input type="checkbox" id="tech-mongodb" name="technologies" value="MongoDB">
+                            <label for="tech-mongodb">MongoDB</label>
+                        </div>
+                        <div class="technology-item">
+                            <input type="checkbox" id="tech-mysql" name="technologies" value="MySQL">
+                            <label for="tech-mysql">MySQL</label>
+                        </div>
+                        <div class="technology-item">
+                            <input type="checkbox" id="tech-postgresql" name="technologies" value="PostgreSQL">
+                            <label for="tech-postgresql">PostgreSQL</label>
+                        </div>
+                        <div class="technology-item">
+                            <input type="checkbox" id="tech-javascript" name="technologies" value="JavaScript">
+                            <label for="tech-javascript">JavaScript</label>
+                        </div>
+                        <div class="technology-item">
+                            <input type="checkbox" id="tech-typescript" name="technologies" value="TypeScript">
+                            <label for="tech-typescript">TypeScript</label>
+                        </div>
+                        <div class="technology-item">
+                            <input type="checkbox" id="tech-python" name="technologies" value="Python">
+                            <label for="tech-python">Python</label>
+                        </div>
+                        <div class="technology-item">
+                            <input type="checkbox" id="tech-django" name="technologies" value="Django">
+                            <label for="tech-django">Django</label>
+                        </div>
+                        <div class="technology-item">
+                            <input type="checkbox" id="tech-flask" name="technologies" value="Flask">
+                            <label for="tech-flask">Flask</label>
+                        </div>
+                        <div class="technology-item">
+                            <input type="checkbox" id="tech-php" name="technologies" value="PHP">
+                            <label for="tech-php">PHP</label>
+                        </div>
+                        <div class="technology-item">
+                            <input type="checkbox" id="tech-laravel" name="technologies" value="Laravel">
+                            <label for="tech-laravel">Laravel</label>
+                        </div>
+                        <div class="technology-item">
+                            <input type="checkbox" id="tech-java" name="technologies" value="Java">
+                            <label for="tech-java">Java</label>
+                        </div>
+                        <div class="technology-item">
+                            <input type="checkbox" id="tech-spring" name="technologies" value="Spring Boot">
+                            <label for="tech-spring">Spring Boot</label>
+                        </div>
+                        <div class="technology-item">
+                            <input type="checkbox" id="tech-csharp" name="technologies" value="C#">
+                            <label for="tech-csharp">C#</label>
+                        </div>
+                        <div class="technology-item">
+                            <input type="checkbox" id="tech-dotnet" name="technologies" value=".NET">
+                            <label for="tech-dotnet">.NET</label>
+                        </div>
+                        <div class="technology-item">
+                            <input type="checkbox" id="tech-ruby" name="technologies" value="Ruby">
+                            <label for="tech-ruby">Ruby</label>
+                        </div>
+                        <div class="technology-item">
+                            <input type="checkbox" id="tech-rails" name="technologies" value="Ruby on Rails">
+                            <label for="tech-rails">Ruby on Rails</label>
+                        </div>
+                        <div class="technology-item">
+                            <input type="checkbox" id="tech-go" name="technologies" value="Go">
+                            <label for="tech-go">Go</label>
+                        </div>
+                        <div class="technology-item">
+                            <input type="checkbox" id="tech-rust" name="technologies" value="Rust">
+                            <label for="tech-rust">Rust</label>
+                        </div>
+                        <div class="technology-item">
+                            <input type="checkbox" id="tech-swift" name="technologies" value="Swift">
+                            <label for="tech-swift">Swift</label>
+                        </div>
+                        <div class="technology-item">
+                            <input type="checkbox" id="tech-kotlin" name="technologies" value="Kotlin">
+                            <label for="tech-kotlin">Kotlin</label>
+                        </div>
+                        <div class="technology-item">
+                            <input type="checkbox" id="tech-flutter" name="technologies" value="Flutter">
+                            <label for="tech-flutter">Flutter</label>
+                        </div>
+                        <div class="technology-item">
+                            <input type="checkbox" id="tech-react-native" name="technologies" value="React Native">
+                            <label for="tech-react-native">React Native</label>
+                        </div>
+                        <div class="technology-item">
+                            <input type="checkbox" id="tech-ionic" name="technologies" value="Ionic">
+                            <label for="tech-ionic">Ionic</label>
+                        </div>
+                        <div class="technology-item">
+                            <input type="checkbox" id="tech-bootstrap" name="technologies" value="Bootstrap">
+                            <label for="tech-bootstrap">Bootstrap</label>
+                        </div>
+                        <div class="technology-item">
+                            <input type="checkbox" id="tech-tailwind" name="technologies" value="Tailwind CSS">
+                            <label for="tech-tailwind">Tailwind CSS</label>
+                        </div>
+                        <div class="technology-item">
+                            <input type="checkbox" id="tech-sass" name="technologies" value="SASS">
+                            <label for="tech-sass">SASS</label>
+                        </div>
+                        <div class="technology-item">
+                            <input type="checkbox" id="tech-webpack" name="technologies" value="Webpack">
+                            <label for="tech-webpack">Webpack</label>
+                        </div>
+                        <div class="technology-item">
+                            <input type="checkbox" id="tech-vite" name="technologies" value="Vite">
+                            <label for="tech-vite">Vite</label>
+                        </div>
+                        <div class="technology-item">
+                            <input type="checkbox" id="tech-docker" name="technologies" value="Docker">
+                            <label for="tech-docker">Docker</label>
+                        </div>
+                        <div class="technology-item">
+                            <input type="checkbox" id="tech-kubernetes" name="technologies" value="Kubernetes">
+                            <label for="tech-kubernetes">Kubernetes</label>
+                        </div>
+                        <div class="technology-item">
+                            <input type="checkbox" id="tech-aws" name="technologies" value="AWS">
+                            <label for="tech-aws">AWS</label>
+                        </div>
+                        <div class="technology-item">
+                            <input type="checkbox" id="tech-azure" name="technologies" value="Azure">
+                            <label for="tech-azure">Azure</label>
+                        </div>
+                        <div class="technology-item">
+                            <input type="checkbox" id="tech-firebase" name="technologies" value="Firebase">
+                            <label for="tech-firebase">Firebase</label>
+                        </div>
+                        <div class="technology-item">
+                            <input type="checkbox" id="tech-git" name="technologies" value="Git">
+                            <label for="tech-git">Git</label>
+                        </div>
+                        <div class="technology-item">
+                            <input type="checkbox" id="tech-github" name="technologies" value="GitHub">
+                            <label for="tech-github">GitHub</label>
+                        </div>
+                        <div class="technology-item">
+                            <input type="checkbox" id="tech-gitlab" name="technologies" value="GitLab">
+                            <label for="tech-gitlab">GitLab</label>
+                        </div>
+                        <div class="technology-item">
+                            <input type="checkbox" id="tech-other" name="technologies" value="Otras">
+                            <label for="tech-other">Otras</label>
+                        </div>
+                    </div>
+                    <small>Selecciona las tecnologías utilizadas en el proyecto</small>
+                </div>
+                
+                <div class="form-group">
+                    <label for="project-client">Cliente (Opcional)</label>
+                    <select id="project-client" name="clientId">
+                        <option value="">Sin cliente específico</option>
+                    </select>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" id="cancel-btn">Cancelar</button>
+                    <button type="submit" class="btn btn-primary" id="submit-btn">Guardar Proyecto</button>
+                </div>
+            </form>
+            
+            <div id="form-loading" class="form-loading" style="display: none;">
+                Guardando proyecto...
+            </div>
+            
+            <div id="form-message" class="form-message" style="display: none;"></div>
+        </div>
+    </div>
+
+    <!-- Modal para confirmar eliminación -->
+    <div id="delete-modal" class="modal">
+        <div class="modal-content delete-modal-content">
+            <div class="modal-header">
+                <h3>Confirmar Eliminación</h3>
+                <span class="close-delete-modal">&times;</span>
+            </div>
+            <div class="delete-modal-body">
+                <div class="delete-warning">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#e74c3c" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="15" y1="9" x2="9" y2="15"></line>
+                        <line x1="9" y1="9" x2="15" y2="15"></line>
+                    </svg>
+                </div>
+                <p>¿Estás seguro de que deseas eliminar este proyecto?</p>
+                <p class="delete-project-name"></p>
+                <p class="delete-warning-text">Esta acción no se puede deshacer.</p>
+            </div>
+            <div class="form-actions">
+                <button type="button" class="btn btn-secondary" id="cancel-delete-btn">Cancelar</button>
+                <button type="button" class="btn btn-danger" id="confirm-delete-btn">Eliminar Proyecto</button>
+            </div>
+            
+            <div id="delete-loading" class="form-loading" style="display: none;">
+                Eliminando proyecto...
+            </div>
+            
+            <div id="delete-message" class="form-message" style="display: none;"></div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 Pablo Dybel y Orianna Lugo. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
