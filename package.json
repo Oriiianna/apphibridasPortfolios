@@ -1,4 +1,5 @@
 {
+  "$schema": "https://json.schemastore.org/package.json",
   "name": "portfolio-web",
   "version": "1.0.0",
   "description": "Sitio web de portafolio con API REST",
@@ -15,7 +16,12 @@
   "devDependencies": {
     "nodemon": "^3.0.1"
   },
-  "keywords": ["portfolio", "mongodb", "express", "api"],
+  "keywords": [
+    "portfolio",
+    "mongodb",
+    "express",
+    "api"
+  ],
   "author": "Pablo y Orianna",
   "license": "MIT"
 }
