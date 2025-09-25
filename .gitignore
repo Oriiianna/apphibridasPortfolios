@@ -2,3 +2,7 @@
 node_modules/
 
 
+# Archivos de datos locales (semillas)
+data.json
+data/*.json
+
