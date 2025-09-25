@@ -27,8 +27,12 @@ app.get('/section/:sectionName', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'section.html'));
 });
 
-// Iniciar servidor
+// Exportar app para uso en Vercel y levantar servidor solo en entorno local
 const PORT = config.PORT || 3333;
-app.listen(PORT, () => {
-    console.log(`Servidor corriendo en http://localhost:${PORT}`);
-});
+if (!process.env.VERCEL) {
+    app.listen(PORT, () => {
+        console.log(`Servidor corriendo en http://localhost:${PORT}`);
+    });
+}
+
+module.exports = app;
