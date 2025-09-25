@@ -12,8 +12,16 @@ const app = express();
 app.use(express.json());
 app.use(express.static('public'));
 
-// Conectar a la base de datos
-connectToDatabase();
+// Asegurar conexión a la base de datos por solicitud (crucial en entornos serverless)
+app.use(async (req, res, next) => {
+    try {
+        await connectToDatabase();
+        next();
+    } catch (err) {
+        console.error('Fallo al conectar a la base de datos:', err?.message || err);
+        res.status(500).json({ error: 'Error de conexión a la base de datos' });
+    }
+});
 
 // Rutas de la API - Usando arquitectura MVC
 app.use('/api', apiRoutes);
